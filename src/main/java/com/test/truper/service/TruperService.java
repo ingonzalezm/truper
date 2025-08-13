@@ -11,7 +11,8 @@ public interface TruperService {
 
 	Sucursal crearSucursal(Sucursal sucursal);
 
-	Producto actualizarProducto(Long sucursalId, Producto producto);
+	Producto actualizarProducto(Long sucursalId, Long ordenId, Producto producto);
 
 	Sucursal getOrdenes(Long sucursalId);
+
 }

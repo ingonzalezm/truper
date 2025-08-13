@@ -30,14 +30,18 @@ public class TruperServiceImpl implements TruperService{
 	@Override
 	public Orden crearOrden(Long sucursalId, List<Producto> productos) {
 		Sucursal sucursal = sucursalRepository.findById(sucursalId).orElseThrow();
-		Double total = productos.stream().map(x -> x.getPrecio())
-		  .collect(Collectors.summingDouble(Double::doubleValue));
+		double total = productos.stream()
+                .mapToDouble(Producto::getPrecio)
+                .sum();
 		Orden orden = new Orden();
 		orden.setSucursal(sucursal);
 		orden.setFecha(LocalDate.now());
 		orden.setTotal(total);
+		
+		productos.forEach(producto -> producto.setOrden(orden));
 		orden.setProductos(productos);
-		return ordenRepository.save(orden);
+		Orden ordens = ordenRepository.save(orden);
+		return ordens;
 	}
 
 	@Override
@@ -46,10 +50,17 @@ public class TruperServiceImpl implements TruperService{
 	}
 
 	@Override
-	public Producto actualizarProducto(Long sucursalId, Producto producto) {
-		Producto product= productoRepository.findByCodigo(producto.getCodigo());
-		product.setPrecio(producto.getPrecio());
-		return productoRepository.save(product);
+	public Producto actualizarProducto(Long sucursalId, Long ordenId, Producto producto) {
+		Orden orden = ordenRepository.findByOrdenIdAndSucursalSucursalId(ordenId, sucursalId).orElseThrow();
+		
+		Producto product = orden.getProductos().stream().filter(p->p.getCodigo().equals(producto.getCodigo())).findFirst().orElseThrow();
+				product.setPrecio(producto.getPrecio());
+		double total = orden.getProductos().stream()
+                .mapToDouble(Producto::getPrecio)
+                .sum();
+		orden.setTotal(total);
+		ordenRepository.save(orden);
+		return product;
 	}
 
 	@Override

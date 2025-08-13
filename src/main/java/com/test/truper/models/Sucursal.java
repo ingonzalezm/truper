@@ -34,7 +34,7 @@ public class Sucursal implements Serializable{
 	@Column(name="nombre")
 	private String nombre;
 	
-	@OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
 	private List<Orden> ordenes;
 	

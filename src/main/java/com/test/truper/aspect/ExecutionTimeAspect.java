@@ -1,4 +1,4 @@
-package com.test.truper.jwt;
+package com.test.truper.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

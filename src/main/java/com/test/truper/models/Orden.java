@@ -46,7 +46,7 @@ public class Orden implements Serializable{
 	@Column(name="total")
 	private Double total;
 	
-	@OneToMany(mappedBy = "orden", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "orden", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
 	private List<Producto> productos;
 
