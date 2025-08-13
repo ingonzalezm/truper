@@ -53,7 +53,7 @@ public class TruperServiceImpl implements TruperService{
 	}
 
 	@Override
-	public Sucursal getOrden(Long sucursalId) {
+	public Sucursal getOrdenes(Long sucursalId) {
 		return sucursalRepository.findById(sucursalId).orElseThrow();
 	}
 

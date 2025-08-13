@@ -32,7 +32,7 @@ public class TruperController {
 	
 	@GetMapping("/ordenes/{sucursalId}")
 	public Sucursal gerOrden(@PathVariable Long sucursalId) {
-		return truperService.getOrden(sucursalId);
+		return truperService.getOrdenes(sucursalId);
 	}
 	
 	@PostMapping("/sucursal")

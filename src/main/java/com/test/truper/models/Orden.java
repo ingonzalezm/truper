@@ -1,11 +1,13 @@
 package com.test.truper.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,8 +23,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="ORDENES")
-public class Orden {
+public class Orden implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4858796712966827618L;
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="orden_id")
 	@Id
@@ -39,7 +46,7 @@ public class Orden {
 	@Column(name="total")
 	private Double total;
 	
-	@OneToMany(mappedBy = "orden", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "orden", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
 	private List<Producto> productos;
 

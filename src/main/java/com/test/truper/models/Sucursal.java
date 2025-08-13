@@ -1,5 +1,6 @@
 package com.test.truper.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -18,8 +19,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="SUCURSALES")
-public class Sucursal {
+public class Sucursal implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4492625340577069756L;
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="sucursal_id")
 	@Id
